@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-
 export interface Usuario {
+  password: string;
   name: string;
   id?: string;
   email: string;
   phone: string;
   curso?: string;
   fecha?: string;
+  rol: 'ADMIN' | 'EMPLEADO';
 }
 
 @Injectable({
@@ -35,7 +36,6 @@ export class UsuarioServices {
       })
     )
   }
-
 
   //Metodo Post
   postUsuario(usuario: Usuario): Observable<Usuario> {

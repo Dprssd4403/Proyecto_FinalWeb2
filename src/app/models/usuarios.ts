@@ -5,4 +5,5 @@ export interface Usuario {
   phone: string;
   curso?: string; 
   fecha?: string;
+  rol: 'ADMIN' | 'EMPLEADO';
 }

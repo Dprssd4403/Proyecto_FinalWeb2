@@ -1,0 +1,218 @@
+:host {
+    --primary: #6366f1;
+    --dark: #0f172a;
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.login-wrapper {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+
+    background-color: #f1f5f9;
+    background-image:
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 40%),
+        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.12) 0px, transparent 40%);
+
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-side h1 {
+    color: #0f172a;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 2rem 0;
+}
+
+.welcome-side p {
+    color: #475569;
+    font-size: 1.1rem;
+    max-width: 400px;
+}
+
+.login-box {
+    background: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    padding: 4rem;
+    border-radius: 40px;
+    color: #1e293b;
+    box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.welcome-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10% 5%;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-side h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 2rem 0;
+    z-index: 2;
+}
+
+.welcome-side p {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+.decoration-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--primary);
+    filter: blur(150px);
+    opacity: 0.2;
+    top: 20%;
+    left: -100px;
+}
+
+.form-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 1);
+    width: 100%;
+    max-width: 500px;
+    padding: 4rem;
+    border-radius: 40px;
+    color: #1e293b;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.badge {
+    display: inline-block;
+    background: #eef2ff;
+    color: var(--primary);
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.form-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    color: #64748b;
+    margin-bottom: 3rem;
+}
+
+.input-field {
+    margin-bottom: 2rem;
+}
+
+.input-field label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 1.2rem;
+    border: 2px solid #f1f5f9;
+    border-radius: 18px;
+    background: #f8fafc;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-field input:focus {
+    border-color: var(--primary);
+    background: white;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 1.2rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+}
+
+.form-footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.form-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.brand-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 850;
+  font-size: 1.6rem;
+  letter-spacing: -1px;
+  
+  /* Efecto de Gradiente en el Texto */
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Suavizado para que se vea premium */
+  text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 900px) {
+    .login-wrapper {
+        flex-direction: column;
+    }
+
+    .welcome-side {
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+
+    .welcome-side h1 {
+        font-size: 2.2rem;
+    }
+
+    .welcome-side p {
+        margin: 0 auto;
+    }
+}

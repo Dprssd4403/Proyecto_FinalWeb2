@@ -4,7 +4,9 @@
         <a routerLink="/" class="flex items-center space-x-3 group">
             <div class="p-2 bg-indigo-500 rounded-xl group-hover:scale-110 transition-transform duration-300">
                 <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z"></path>
+                    <path
+                        d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z">
+                    </path>
                 </svg>
             </div>
             <span class="self-center text-xl font-black tracking-tight text-white italic">EduMaster</span>
@@ -18,10 +20,10 @@
         </button>
 
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul class="font-bold flex flex-col items-center p-4 md:p-0 mt-4 border border-slate-800 rounded-2xl bg-slate-900 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent text-sm uppercase tracking-wider">
+            <ul
+                class="font-bold flex flex-col items-center p-4 md:p-0 mt-4 border border-slate-800 rounded-2xl bg-slate-900 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent text-sm uppercase tracking-wider">
                 <li>
-                    <a routerLink="/" routerLinkActive="text-indigo-400"
-                        [routerLinkActiveOptions]="{exact: true}"
+                    <a routerLink="/" routerLinkActive="text-indigo-400" [routerLinkActiveOptions]="{exact: true}"
                         class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Inicio</a>
                 </li>
                 <li>
@@ -32,7 +34,7 @@
                     <a routerLink="cursos" routerLinkActive="text-indigo-400"
                         class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Cursos</a>
                 </li>
-                 <li>
+                <li>
                     <a routerLink="catalogo" routerLinkActive="text-indigo-400"
                         class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Catalogo</a>
                 </li>
@@ -40,9 +42,14 @@
                     <a routerLink="contacto" routerLinkActive="text-indigo-400"
                         class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Contacto</a>
                 </li>
-                
+                <li>
+                    <a routerLink="login" routerLinkActive="text-indigo-400"
+                        class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Iniciar
+                        Sesión</a>
+                </li>
+
                 <li class="mt-4 md:mt-0">
-                    <a routerLink="registro" 
+                    <a routerLink="registro"
                         class="inline-block py-2.5 px-6 text-slate-900 bg-white rounded-lg font-black text-center hover:bg-indigo-500 hover:text-white shadow-[0_4px_20px_-5px_rgba(255,255,255,0.3)] transition-all transform hover:-translate-y-1 active:scale-95">
                         REGISTRARSE
                     </a>
