@@ -23,6 +23,7 @@ export class Cursos implements OnInit {
 
   private limpiarCurso(): Curso {
     return {
+      nombre:'',
       titulo: '',
       instructor: '',
       descripcion: '',
@@ -51,7 +52,7 @@ export class Cursos implements OnInit {
     });
   }
 
-  borrarCurso(id: string | undefined): void {
+  borrarCurso(id: number | undefined): void {
     if (id && confirm('¿Deseas eliminar este curso de forma permanente?')) {
       this.cursoService.deleteCurso(id).subscribe(() => this.obtenerCursos());
     }

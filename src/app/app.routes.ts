@@ -14,6 +14,7 @@ import { authGuardDeactivate } from './guards/deactive-guard';
 import { adminGuard } from './guards/match-guard';
 import { adminChildGuard } from './guards/active-child-guard';
 import { Error } from './shared/error/error';
+import { InscripcionComponent } from './features/inscripcion/inscripcion';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -21,6 +22,7 @@ export const routes: Routes = [
     { path: 'contacto', component: Contacto },
     { path: 'catalogo', component: CatalogoCursos },
     { path: 'login', component: Login },
+    { path: 'inscripcion', component: InscripcionComponent },
     { path: 'error', component: Error },
     { 
         path: 'registro', 

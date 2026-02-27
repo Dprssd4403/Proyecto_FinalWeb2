@@ -1,5 +1,4 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { User } from 'firebase/auth'; // Asegúrate de tener instalado: npm install firebase
 import { map, Observable } from 'rxjs';
 import { UsuarioServices } from './usuario-services';
 
@@ -11,12 +10,37 @@ export class AuthService {
 
   sesionIniciada = signal<boolean>(localStorage.getItem('sesion') === 'true');
   rolActual = signal<string | null>(localStorage.getItem('rol'));
-  usuario: User | null = null;
+
+  getUserName(): string {
+    const user = localStorage.getItem('user');
+    if (user) {
+      const userData = JSON.parse(user);
+      return userData.name || userData.nombre || 'Usuario';
+    }
+    return 'Invitado';
+  }
+
+  getUserEmail(): string {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).email : '';
+  }
+
+  getUserId(): number {
+    const user = localStorage.getItem('user');
+    return user ? Number(JSON.parse(user).id) : 0;
+  }
+
+ 
+  getRole(): string | null {
+    return this.rolActual();
+  }
 
   login(email: string, password: string): Observable<boolean> {
     return this.servicioUsuario.getUsuarios().pipe(
       map(usuarios => {
-        const usuarioCoincide = usuarios.find(u => u.email === email && u.password === password);
+        const usuarioCoincide = usuarios.find(
+          u => u.email === email && u.password === password
+        );
 
         if (usuarioCoincide) {
           localStorage.setItem('sesion', 'true');
@@ -33,14 +57,8 @@ export class AuthService {
     );
   }
 
-  getRole(): string | null {
-    return this.rolActual();
-  }
-
-  logout() {
-    localStorage.removeItem('sesion');
-    localStorage.removeItem('user');
-    localStorage.removeItem('rol');
+  logout(): void {
+    localStorage.clear();
     this.sesionIniciada.set(false);
     this.rolActual.set(null);
   }

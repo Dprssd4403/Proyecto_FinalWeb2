@@ -6,7 +6,7 @@ import { Features } from "../../shared/features/features";
 
 @Component({
   selector: 'app-registro',
-  imports: [Hero, Formulario, Soporte, Features],
+  imports: [Formulario, Soporte],
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })

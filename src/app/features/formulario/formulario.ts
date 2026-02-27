@@ -2,8 +2,6 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-// Asegúrate de que estas rutas sean las correctas en tu proyecto
 import { Usuario } from '../../models/usuarios'; 
 import { AuthService } from '../../services/auth-service';
 import { Salir } from '../../guards/deactive-guard';
@@ -25,7 +23,6 @@ export class Formulario implements OnInit, Salir {
   listaUsuarios = signal<Usuario[]>([]);
   editando = false;
 
-  // Ajustado a las propiedades que usas: name, email, phone, etc.
   nuevoUsuario: Usuario = {
     name: '',
     email: '',
@@ -33,7 +30,7 @@ export class Formulario implements OnInit, Salir {
     password: '',
     curso: '',
     fecha: '',
-    rol: 'ROLE_ADMIN'
+    rol: 'ROLE_EMPLEADO'
   };
 
   ngOnInit(): void {
@@ -99,7 +96,7 @@ export class Formulario implements OnInit, Salir {
       password: '', 
       curso: '',
       fecha: '',
-      rol: 'ROLE_ADMIN' 
+      rol: 'ROLE_EMPLEADO' 
     };
   }
 

@@ -1,0 +1,84 @@
+<div class="min-h-screen bg-slate-950 pt-24 pb-12 px-4 font-sans">
+  <div class="max-w-4xl mx-auto">
+    
+    <div class="text-center mb-10">
+      <h2 class="text-4xl font-black text-white uppercase tracking-tighter">
+        Finalizar <span class="text-indigo-500">Inscripción</span>
+      </h2>
+      <p class="text-slate-400 text-sm mt-2">Confirma los detalles de tu materia a continuación.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <div class="lg:col-span-1">
+        <div class="bg-slate-900/50 border border-white/5 p-6 rounded-3xl backdrop-blur-md">
+          <h3 class="text-indigo-400 font-bold text-xs uppercase tracking-[0.2em] mb-6">Ficha del Estudiante</h3>
+          <div class="space-y-5">
+            <div>
+              <label class="text-[10px] text-slate-500 uppercase font-black">Nombre completo</label>
+              <p class="text-white font-medium border-b border-white/5 pb-2">{{ authService.getUserName() }}</p>
+            </div>
+            <div>
+              <label class="text-[10px] text-slate-500 uppercase font-black">Correo institucional</label>
+              <p class="text-white font-medium border-b border-white/5 pb-2">{{ authService.getUserEmail() }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2">
+        <form (submit)="procesarInscripcion($event)" class="bg-slate-900 border border-white/10 p-8 rounded-3xl shadow-2xl space-y-6">
+          
+          <div>
+            <label class="block text-slate-300 font-bold mb-3 text-sm">Seleccionar Materia / Título</label>
+            <div class="relative">
+              <select 
+                name="cursoId" 
+                (change)="onCursoChange($event)"
+                class="w-full bg-slate-800 border-2 border-transparent focus:border-indigo-500 text-white p-4 rounded-2xl outline-none transition-all appearance-none cursor-pointer"
+                required>
+                <option value="" disabled selected>Haz clic para elegir un curso...</option>
+                @for (curso of cursos(); track curso.id) {
+                  <option [value]="curso.id">{{ curso.titulo}}</option>
+                }
+              </select>
+              <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-500">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+          </div>
+
+          @if (cursoSeleccionado()) {
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 animate-in fade-in slide-in-from-bottom-2 duration-500">
+              
+              <div class="space-y-2">
+                <label class="text-[10px] text-slate-500 font-black uppercase ml-1">Ubicacion</label>
+                <div class="bg-slate-800/50 border border-indigo-500/20 text-indigo-300 p-4 rounded-xl font-bold flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                  {{ cursoSeleccionado().ubicacion }}
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label class="text-[10px] text-slate-500 font-black uppercase ml-1">Costo de la Materia</label>
+                <div class="bg-slate-800/50 border border-emerald-500/20 text-emerald-400 p-4 rounded-xl font-mono text-xl font-black">
+                  ${{ cursoSeleccionado().precio }}
+                </div>
+              </div>
+            </div>
+          }
+
+          <div class="pt-6">
+            <button 
+              type="submit" 
+              [disabled]="!cursoSeleccionado()"
+              class="w-full py-5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-black rounded-2xl shadow-xl shadow-indigo-500/10 transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-widest">
+              {{ cursoSeleccionado() ? 'Confirmar y Registrar' : 'Selecciona un curso' }}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
