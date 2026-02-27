@@ -6,6 +6,7 @@ import { Nosotros } from './features/nosotros/nosotros';
 import { Cursos } from './shared/cursos/cursos';
 import { CatalogoCursos } from './features/catalogo-cursos/catalogo-cursos';
 import { Login } from './shared/login/login';
+import { Usuarios } from './shared/usuarios/usuarios'; 
 
 // Guardianes
 import { authGuard } from './guards/auth-guard';
@@ -34,6 +35,11 @@ export const routes: Routes = [
             {
                 path: 'cursos',
                 component: Cursos,
+                canMatch: [adminGuard]
+            },
+            {
+                path: 'usuarios', // Nueva ruta para gestionar usuarios
+                component: Usuarios,
                 canMatch: [adminGuard]
             }
         ]

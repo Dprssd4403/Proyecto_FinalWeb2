@@ -26,20 +26,26 @@
                         class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Inicio</a></li>
                 <li><a routerLink="nosotros" routerLinkActive="text-indigo-400"
                         class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Nosotros</a></li>
+                
                 @if (authService.getRole() === 'ADMIN') {
                 <li>
                     <a routerLink="/admin/cursos" routerLinkActive="text-indigo-400"
-                        class="text-indigo-300 hover:text-white">
-                        Gestionar Cursos (Admin)
+                        class="block py-2 text-indigo-300 hover:text-white transition-all duration-300">
+                        Gestionar Cursos
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/admin/usuarios" routerLinkActive="text-indigo-400"
+                        class="block py-2 text-indigo-300 hover:text-white transition-all duration-300">
+                        Gestionar Usuarios
                     </a>
                 </li>
                 } @else {
-                <li><a routerLink="catalogo" class="text-slate-300 hover:text-white">Catálogo</a></li>
+                <li><a routerLink="catalogo" class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Catálogo</a></li>
                 }
+
                 <li><a routerLink="contacto" routerLinkActive="text-indigo-400"
                         class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Contacto</a></li>
-
-
 
                 <li>
                     <a routerLink="login" routerLinkActive="text-indigo-400"
