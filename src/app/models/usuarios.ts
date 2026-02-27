@@ -1,10 +1,10 @@
 export interface Usuario {
-  id?: string;
+  id?: number;
   name: string;
   email: string;
   phone: string;
-  rol: 'ADMIN' | 'EMPLEADO';
   password?: string;
-  curso?: string;
-  fecha?: string;
+  curso: string;
+  fecha: string;
+  rol: 'ROLE_ADMIN' | 'ROLE_EMPLEADO';
 }

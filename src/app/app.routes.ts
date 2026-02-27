@@ -25,7 +25,6 @@ export const routes: Routes = [
     { 
         path: 'registro', 
         component: Registro,
-        canActivate: [authGuard],
         canDeactivate: [authGuardDeactivate]
     },
     {
@@ -38,7 +37,7 @@ export const routes: Routes = [
                 canMatch: [adminGuard]
             },
             {
-                path: 'usuarios', // Nueva ruta para gestionar usuarios
+                path: 'usuarios',
                 component: Usuarios,
                 canMatch: [adminGuard]
             }

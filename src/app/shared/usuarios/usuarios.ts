@@ -1,13 +1,15 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Añadido para directivas básicas si usas signals en el HTML
 import { FormsModule } from '@angular/forms';
-import { Usuario, UsuarioServices } from '../../services/usuario.service'; 
 import { AuthAdmin } from '../../services/auth-admin'; 
+import { UsuarioServices } from '../../services/usuario-services';
+import { Usuario } from '../../models/usuarios';
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [FormsModule],
-  templateUrl: './usuarios.component.html'
+  imports: [FormsModule, CommonModule],
+  templateUrl: './usuarios.html'
 })
 export class Usuarios implements OnInit {
   private usuarioService = inject(UsuarioServices);
@@ -16,14 +18,16 @@ export class Usuarios implements OnInit {
   listaUsuarios = signal<Usuario[]>([]);
   
   editando = false;
-  idSeleccionado: string | null = null;
+  idSeleccionado: number | null = null;
 
   nuevoUsuario: Usuario = {
     name: '',
     email: '',
     phone: '',
     password: '',
-    rol: 'EMPLEADO' 
+    curso: '',
+    fecha: '',
+    rol: 'ROLE_ADMIN' 
   };
 
   ngOnInit(): void {
@@ -32,7 +36,7 @@ export class Usuarios implements OnInit {
 
   obtenerUsuarios() {
     this.usuarioService.getUsuarios().subscribe({
-      next: (data) => {
+      next: (data: Usuario[]) => {
         this.listaUsuarios.set(data);
       },
       error: (err) => console.error('Error al sincronizar datos:', err)
@@ -42,7 +46,7 @@ export class Usuarios implements OnInit {
   guardarUsuario() {
     if (!this.nuevoUsuario.name || !this.nuevoUsuario.email) return;
 
-    if (this.editando && this.idSeleccionado) {
+    if (this.editando && this.idSeleccionado !== null) {
       this.usuarioService.putUsuario(this.idSeleccionado, this.nuevoUsuario).subscribe({
         next: () => {
           this.resetear();
@@ -61,20 +65,24 @@ export class Usuarios implements OnInit {
 
   seleccionarParaEditar(usuario: Usuario) {
     this.editando = true;
-    this.idSeleccionado = usuario.id || null;
+    this.idSeleccionado = usuario.id ?? null;
     this.nuevoUsuario = { ...usuario };
   }
 
-  eliminarUsuario(id: string) {
+  eliminarUsuario(id: number) {
     const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
-    if (id === currentUser.id) {
+    
+    if (id === Number(currentUser.id)) {
       alert('No puedes eliminar tu propia cuenta de administrador.');
       return;
     }
 
     if (confirm('¿Revocar acceso a este usuario permanentemente?')) {
-      this.usuarioService.deleteUsuario(id).subscribe(() => {
-        this.obtenerUsuarios();
+      this.usuarioService.deleteUsuario(id).subscribe({
+        next: () => {
+          this.obtenerUsuarios();
+        },
+        error: (err) => console.error('Error al eliminar:', err)
       });
     }
   }
@@ -87,7 +95,9 @@ export class Usuarios implements OnInit {
       email: '',
       phone: '',
       password: '',
-      rol: 'EMPLEADO'
+      curso: '',
+      fecha: '',
+      rol: 'ROLE_ADMIN'
     };
   }
 }

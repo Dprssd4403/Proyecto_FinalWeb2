@@ -6,8 +6,9 @@ export const adminGuard: CanMatchFn = (route, segments) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.getRole() === 'ADMIN') {
+  if (authService.getRole() === 'ROLE_ADMIN') {
     return true;
   }
-  return false; 
+  router.navigate(['/error']);
+  return false;
 };

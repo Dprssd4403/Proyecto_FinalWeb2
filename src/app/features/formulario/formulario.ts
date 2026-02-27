@@ -2,11 +2,12 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Usuario, UsuarioServices } from '../../services/usuario-services';
-import { Salir } from '../../guards/deactive-guard';
+
+// Asegúrate de que estas rutas sean las correctas en tu proyecto
+import { Usuario } from '../../models/usuarios'; 
 import { AuthService } from '../../services/auth-service';
-
-
+import { Salir } from '../../guards/deactive-guard';
+import { UsuarioServices } from '../../services/usuario-services';
 
 @Component({
   selector: 'app-formulario',
@@ -24,6 +25,7 @@ export class Formulario implements OnInit, Salir {
   listaUsuarios = signal<Usuario[]>([]);
   editando = false;
 
+  // Ajustado a las propiedades que usas: name, email, phone, etc.
   nuevoUsuario: Usuario = {
     name: '',
     email: '',
@@ -31,7 +33,7 @@ export class Formulario implements OnInit, Salir {
     password: '',
     curso: '',
     fecha: '',
-    rol: 'ADMIN'
+    rol: 'ROLE_ADMIN'
   };
 
   ngOnInit(): void {
@@ -39,8 +41,11 @@ export class Formulario implements OnInit, Salir {
   }
 
   obtenerUsuarios() {
-    this.servicioUsuario.getUsuarios().subscribe(usuarios => {
-      this.listaUsuarios.set(usuarios);
+    this.servicioUsuario.getUsuarios().subscribe({
+      next: (usuarios: Usuario[]) => {
+        this.listaUsuarios.set(usuarios);
+      },
+      error: (err: any) => console.error('Error al cargar usuarios:', err)
     });
   }
 
@@ -49,12 +54,14 @@ export class Formulario implements OnInit, Salir {
     
     if (confirm(`¿Estás seguro de que deseas ${accion} a este usuario?`)) {
       if (this.editando && this.nuevoUsuario.id) {
-        this.servicioUsuario.putUsuario(this.nuevoUsuario.id, this.nuevoUsuario).subscribe(() => {
-          this.finalizarYSalir();
+        this.servicioUsuario.putUsuario(this.nuevoUsuario.id, this.nuevoUsuario).subscribe({
+          next: () => this.finalizarYSalir(),
+          error: (err: any) => console.error('Error al actualizar:', err)
         });
       } else {
-        this.servicioUsuario.postUsuario(this.nuevoUsuario).subscribe(() => {
-          this.finalizarYSalir();
+        this.servicioUsuario.postUsuario(this.nuevoUsuario).subscribe({
+          next: () => this.finalizarYSalir(),
+          error: (err: any) => console.error('Error al registrar:', err)
         });
       }
     }
@@ -66,13 +73,17 @@ export class Formulario implements OnInit, Salir {
     this.router.navigate(['/']);
   }
 
-  eliminarUsuario(id: string) {
-    if (confirm('¿Desea eliminar el registro?')) {
-      this.servicioUsuario.deleteUsuario(id).subscribe(() => {
+
+  eliminarUsuario(id: number) { 
+  if (confirm('¿Desea eliminar el registro?')) {
+    this.servicioUsuario.deleteUsuario(id).subscribe({
+      next: () => {
         this.listaUsuarios.set(this.listaUsuarios().filter(u => u.id !== id));
-      });
-    }
+      },
+      error: (err: any) => console.error('Error al eliminar:', err)
+    });
   }
+}
 
   seleccionarParaEditar(user: Usuario) {
     this.editando = true;
@@ -88,10 +99,11 @@ export class Formulario implements OnInit, Salir {
       password: '', 
       curso: '',
       fecha: '',
-      rol: 'EMPLEADO' 
+      rol: 'ROLE_ADMIN' 
     };
   }
 
+  // Lógica del Guard CanDeactivate
   permiteSalir(): boolean {
     const hayDatosIntroducidos = 
       (this.nuevoUsuario.name?.trim() ?? '') !== '' || 

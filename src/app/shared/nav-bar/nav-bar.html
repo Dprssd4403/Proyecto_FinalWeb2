@@ -27,7 +27,7 @@
                 <li><a routerLink="nosotros" routerLinkActive="text-indigo-400"
                         class="block py-2 text-slate-300 hover:text-white transition-all duration-300">Nosotros</a></li>
                 
-                @if (authService.getRole() === 'ADMIN') {
+                @if (authService.getRole() === 'ROLE_ADMIN') {
                 <li>
                     <a routerLink="/admin/cursos" routerLinkActive="text-indigo-400"
                         class="block py-2 text-indigo-300 hover:text-white transition-all duration-300">
